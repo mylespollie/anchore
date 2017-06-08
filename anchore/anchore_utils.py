@@ -690,11 +690,29 @@ def print_result(config, result, outputmode=None):
                     if tablemode == 'stdout':
                         print t.get_string(sortby=sortby, reversesort=True)
                     elif tablemode == 'html':
+			print ("""<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>
+				<script>
+					$(document).ready(function(){
+       						$(\"td:contains('http')\").each(function() {
+           						$(this).wrapInner('<a href=\"' + $(this).text() + '\"/>');
+       						});
+					});
+				</script>""")
+
                         print t.get_html_string(sortby=sortby, reversesort=True).encode('utf8')
                 else:
                     if tablemode == 'stdout':
                         print t
                     elif tablemode == 'html':
+			print ("""<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>
+				<script>
+					$(document).ready(function(){
+        					$(\"td:contains('http')\").each(function() {
+           						$(this).wrapInner('<a href=\"' + $(this).text() + '\"/>');
+       						});
+					});
+				</script>""")
+
                         print t.get_html_string().encode('utf8')
                 print ""
             elif outputmode == 'plaintext':
